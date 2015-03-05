@@ -1,5 +1,5 @@
 # STAT333_RegressionAnalysis
-This is a repo for STAT333 at UW-Madison. 
+This is a repo for the course STAT333 I am taking, taught by Prof. Kevin Packard, at UW-Madison, . 
 
 I commit the code, HWs and some other stuffs here just to keep things organized...
 
