@@ -35,37 +35,38 @@ solve(t(X) %*% X)
 # Question 4, textbook 5.24 
 # a) 
 # 1) obtain beta vector
-beta = solve(t(X) %*% X) %*% (t(X) %*% Y)
+beta = solve(t(X) %*% X) %*% (t(X) %*% Y); beta
 
 # 2) obtain residuals 
 Yfitted = X %*% beta
-residuals = Y - Yfitted
+residuals = Y - Yfitted;residuals
 
 # 3) SSR
-SSR = sum((Yfitted - mean(Y))^2)
+SSR = sum((Yfitted - mean(Y))^2);SSR
 
 # 4) SSE
-SSE = sum(residuals^2)
+SSE = sum(residuals^2);SSE
 
 # 5) variance and covariance matrix for betas
 MSE = SSE / 4
-beta_vcov = MSE * var(solve(t(X) %*% X))
+beta_vcov = MSE * var(solve(t(X) %*% X)); beta_vcov
 
 # 6) point estimate of Y when X = 4
 Xhat = c(1, 4)
-Yhat = Xhat %*% beta
+Yhat = Xhat %*% beta; Yhat
 
 # 7) variance of a new prediction, where Xhat is 4
-Yhat_var = MSE * (1 + t(Xhat) %*% solve(t(X) %*% X) %*% Xhat)
+Yhat_var = MSE * (1 + t(Xhat) %*% solve(t(X) %*% X) %*% Xhat);Yhat_var
 
 # b) variance of beta1 and beta0, and their covariance
-cov_b0_b1 = beta_vcov[1,2]
-var_b0 = beta_vcov[1,1]
-var_b1 = beta_vcov[2,2]
+beta_vcov
+covariance_of_b0_and_b1 = beta_vcov[1,2];covariance_of_b0_and_b1
+variance_b0 = beta_vcov[1,1];variance_b0
+variance_b1 = beta_vcov[2,2];variance_b1
 
 
 # c) the hat matrix 
-H = X %*% solve((t(X) %*% X)) %*% t(X)
+H = X %*% solve((t(X) %*% X)) %*% t(X);H
 
 # d) variance-covariance matrix for residuals
 MSE * (diag(dim(H)[1]) - H)
