@@ -49,7 +49,7 @@ SSE = sum(residuals^2);SSE
 
 # 5) variance and covariance matrix for betas
 MSE = SSE / 4
-beta_vcov = MSE * var(solve(t(X) %*% X)); beta_vcov
+beta_vcov = MSE * solve(t(X) %*% X); beta_vcov
 
 # 6) point estimate of Y when X = 4
 Xhat = c(1, 4)
