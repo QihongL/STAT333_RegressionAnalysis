@@ -41,11 +41,14 @@ beta = solve(t(X) %*% X) %*% (t(X) %*% Y); beta
 Yfitted = X %*% beta
 residuals = Y - Yfitted;residuals
 
+H = X %*% solve((t(X) %*% X)) %*% t(X);
+
 # 3) SSR
-SSR = sum((Yfitted - mean(Y))^2);SSR
+J = matrix(rep(rep(1,6),6),6,6)
+SSR = t(Y) %*%  (H - J / 6) %*% Y;SSR
 
 # 4) SSE
-SSE = sum(residuals^2);SSE
+SSE = t(Y) %*%  (diag(6) - H) %*% Y;SSE
 
 # 5) variance and covariance matrix for betas
 MSE = SSE / 4
