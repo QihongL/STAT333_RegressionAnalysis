@@ -9,12 +9,13 @@ dim(mydata)
 # eliminate row with NA 
 mydata = mydata[complete.cases(mydata), ]
 
-# temp: trim the dimentionality of the input space
-# mydata = data.frame(mydata[1:300,2:10])
+# temp: trim the dimentionality of the input space 
+# important before plotting data...
+mydata = data.frame(mydata[1:300,2:10])
 
 # glance at the data
 summary(mydata)
-# ggpairs(mydata, pch = 20)
+ggpairs(mydata, pch = 20)
 plot(mydata, pch = 16)
 
 # fit everything (with all interaction)
