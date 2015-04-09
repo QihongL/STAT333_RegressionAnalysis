@@ -6,34 +6,34 @@ library(car)
 library(plyr)
 mydata = read.csv('databases/OpenAir_example_data_long.csv')
 dim(mydata)
-# eliminate row with NA 
-mydata = mydata[complete.cases(mydata), ]
 
-# temp: trim the dimentionality of the input space 
-# important before plotting data...
-mydata = data.frame(mydata[1:300,2:10])
+# eliminate rows with missing values (NA)
+mydata = mydata[complete.cases(mydata), ]
+# switch the response variables to the end of the dataframe
+mydata[length(mydata) + 1] = mydata[7]
+mydata[7] = NULL
+colnames(mydata)[10] = 'pm10'
+
+# temp: trim the dimentionality of the input space (to plot data)
+mydataTrim = data.frame(mydata[1:300,2:10])
 
 # glance at the data
+head(mydata)
 summary(mydata)
-ggpairs(mydata, pch = 20)
-plot(mydata, pch = 16)
+# ggpairs(mydataTrim)
+plot(mydataTrim, pch = 16)
 
-# fit everything (with all interaction)
-lm.fit = lm (mydata$pm10 ~ mydata$nox * mydata$no2 * mydata$so2 * mydata$co)
-summary(lm.fit)
-anova(lm.fit)
-Anova(lm.fit, type = 'III')
-# plot(lm.fit, pch = 16)
+# fit all air quality measures (with all interaction)
+lm.fit_all = lm (mydata$pm10 ~ mydata$nox * mydata$no2 * mydata$o3 * mydata$so2 * mydata$co)
+summary(lm.fit_all)
+anova(lm.fit_all)
+Anova(lm.fit_all, type = 'III')
 
-
-# lm.fit_noInt = lm (mydata$pm10 ~ mydata$ws + mydata$wd + mydata$nox + 
-#                  mydata$no2 + mydata$o3 + mydata$so2 + mydata$co)
-# 
-# 
-# # fitting individual predictor
-# lm.fit_nox = lm (mydata$pm10 ~ mydata$nox)
-# summary(lm.fit_nox)
-# plot(mydata$pm10 ~ mydata$nox, pch = 20)
-# abline(lm.fit_nox)
-# plot(lm.fit_nox)
-
+####### TODO ##############
+## check auto-correlations
+## check multicolinearity
+## variable selections
+## residual analysis
+## standardization
+## regularization 
+###########################
