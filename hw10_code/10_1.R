@@ -1,7 +1,19 @@
-# HW10 - 1 - Commercial properties
+# HW10 - Commercial properties
 setwd('/Users/Qihong/Code/github/STAT333_RegressionAnalysis/hw10_code')
 rm(list = ls());
 library(car);library(perturb)
 mydata = read.table('CH06PR18.txt', header = F, col.names = c('rentalRate_Y','age_X1','expenses_X2','vacancy_X3','sqrFootage_X4'))
 mydata = data.frame(mydata)
+
+# scatter 
+plot(mydata, pch = 16)
+
+# linear model
+lm.fit = lm(rentalRate_Y ~ age_X1 + expenses_X2 + vacancy_X3 + sqrFootage_X4, data = mydata)
+# hw 10.1 - added variable plots
+avPlots(lm.fit, pch = 16)
+
+# hw 10.2 - outlier identification 
+par(mfrow = c(2,2))
+plot(lm.fit, pch = 16)
 
