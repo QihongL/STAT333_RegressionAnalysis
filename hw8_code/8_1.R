@@ -17,6 +17,9 @@ lm.fit_1234 = lm(mydata$rentalRate_Y ~ mydata$age_X1 + mydata$expenses_X2
 C = rbind (c(0, 0, 0, 0, 1), c(0, 1, -1, 0, 0), c(0, 0, 1, -1, 0))
 d = c(0, 0, 0)
 
+
+C = rbind (c(0, 0, 0, 0, 1))
+d = c(0)
 # 8.1.2 hypothesis test
 linearHypothesis(lm.fit_1234, hypothesis.matrix = C, rhs = d)
 
